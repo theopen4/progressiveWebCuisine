@@ -37,6 +37,11 @@ app.get('/api/foods',(req, res, next)=>{
      .then(foods => res.status(200).json(foods))
      .catch(error=>res.status(400).json({error}));
 })
+app.get('/api/ingredients',(req, res, next)=>{
+  Ingredients.find()
+     .then(ingredient => res.status(200).json(ingredient))
+     .catch(error=>res.status(400).json({error}));
+})
 
 
 
