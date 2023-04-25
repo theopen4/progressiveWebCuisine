@@ -1,7 +1,10 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
-const Ingredients = require('./models/Ingredients')
+const Ingredients = require('./models/Ingredients');
+const Food = require('./models/Food');
+
+
 app.use(express.json());
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -9,19 +12,30 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
     next();
   });
-app.post('/api/foods',(req, res)=>{
+app.post('/api/food',(req, res)=>{
     delete req.body._id;
-    const ingredients = new Thing({
+    const food = new Food({
         ...req.body
     });
-    thing.save()
+    food.save()
         .then(()=>{res.status(201).json({message: 'nourriture enregistre!'})})
         .catch(error=>res.status(400).json({error}));
     
+});
+app.post('/api/ingredient',(req, res)=>{
+    delete req.body._id
+    const ingredient = new Ingredients({
+        ...req.body
+    });
+    ingredient.save()
+        .then(()=>{res.status(201).json({message: 'ingredient enregistre'})})
+        .catch(error=>res.status(400).json({error}))
 
-   
-    
-   
+});
+app.use('/api/foods',(req, res, next)=>{
+  Food.find()
+     .then(foods => res.status(200).json(foods))
+     .catch(error=>res.status(400).json({error}));
 })
 
 
