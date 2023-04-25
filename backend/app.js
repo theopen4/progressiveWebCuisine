@@ -32,11 +32,13 @@ app.post('/api/ingredient',(req, res)=>{
         .catch(error=>res.status(400).json({error}))
 
 });
-app.use('/api/foods',(req, res, next)=>{
+app.get('/api/foods',(req, res, next)=>{
   Food.find()
      .then(foods => res.status(200).json(foods))
      .catch(error=>res.status(400).json({error}));
 })
+
+
 
 
 mongoose.connect("mongodb+srv://Theopen4:Theopen456@clusterdbrecetes.73jespq.mongodb.net/?retryWrites=true&w=majority",
