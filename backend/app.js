@@ -64,9 +64,16 @@ app.put('/api/ingredient/:id',(req, res, next)=>{
      .then(()=>{res.status(200).json({message: 'ingredients modifie'})})
      .catch(error=>res.status(400).json({error}));
 });
-
-
-
+ app.delete('/api/food/:id',(req, res, next)=>{
+    Food.deleteOne({id: req.params.id})
+      .then(()=>{res.status(200).json({message:'nourriture supprime'})})
+      .catch(error=>res.status(400).json({error}));
+ });
+ app.delete('/api/ingredient/:id',(req, res, next)=>{
+    Ingredients.deleteOne({id: req.params.id})
+      .then(()=>{res.status(200).json({message:'ingrdients supprime'})})
+      .catch(error=>res.status(400).json({error}));
+ });
 
 
 mongoose.connect("mongodb+srv://Theopen4:Theopen456@clusterdbrecetes.73jespq.mongodb.net/?retryWrites=true&w=majority",
