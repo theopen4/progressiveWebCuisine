@@ -43,6 +43,29 @@ app.get('/api/ingredients',(req, res, next)=>{
      .catch(error=>res.status(400).json({error}));
 })
 
+app.get('/api/foods/:id',(req, res, next)=>{
+  Food.findOne({_id: req.params.id})
+    .then(food => res.status(200).json(food))
+    .catch(error => res.status(404).json({ error }));
+})
+app.get('/api/ingredients/:id',(req, res, next)=>{
+  Food.findOne({_id: req.params.id})
+    .then(ingredients => res.status(200).json(ingredients))
+    .catch(error => res.status(404).json({ error }));
+})
+
+app.put('/api/food/:id',(req, res, next)=>{
+  Food.updateOne({_id: req.params.id}, { ...req.body , _id: req.params.id, })
+     .then(()=>{res.status(200).json({message: 'la nouriture a ete modifie'})})
+     .catch(error=>res.status(400).json({error}))
+});
+app.put('/api/ingredient/:id',(req, res, next)=>{
+  Ingredients.updateOne({_id: req.params.id}, { ...req.body , _id: req.params.id, })
+     .then(()=>{res.status(200).json({message: 'ingredients modifie'})})
+     .catch(error=>res.status(400).json({error}));
+});
+
+
 
 
 
