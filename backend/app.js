@@ -3,6 +3,7 @@ const app = express();
 const mongoose = require('mongoose');
 const foodRoute = require('./routes/foods')
 const ingeredientRoute = require('./routes/ingredients')
+const userRoutes = require('./routes/user');
 app.use(express.json());
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -19,6 +20,8 @@ mongoose.connect("mongodb+srv://Theopen4:Theopen456@clusterdbrecetes.73jespq.mon
 
   app.use('/api/food', foodRoute);
   app.use('/api/ingredient', ingeredientRoute );
+  app.use('/api/auth', userRoutes);
+  
 
 
 
