@@ -1,17 +1,18 @@
 const express = require('express');
+const auth = require('../middleware/auth');
 const router = express.Router();
 const foodCtrl = require('../controllers/food');
 
-router.post('/',foodCtrl.createFood)
+router.post('/',auth, foodCtrl.createFood)
 
-router.get('/',foodCtrl.getOneFood)
-
-
-router.get('/:id',foodCtrl.getAllFood)
+router.get('/',auth, foodCtrl.getOneFood)
 
 
-router.put('/:id',foodCtrl.modifyFood);
+router.get('/:id',auth, foodCtrl.getAllFood)
 
-router.delete('/:id',foodCtrl.deleteFood);
+
+router.put('/:id',auth, foodCtrl.modifyFood);
+
+router.delete('/:id', auth, foodCtrl.deleteFood);
 
 module.exports = router;

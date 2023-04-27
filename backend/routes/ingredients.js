@@ -1,16 +1,17 @@
 const express = require('express');
 const router = express.Router();
 const ingredientCtrl = require('../controllers/ingredient')
+const auth = require('../middleware/auth');
 
 
-router.post('/',ingredientCtrl.createIngredient);
+router.post('/',auth, ingredientCtrl.createIngredient);
 
-router.get('/',ingredientCtrl.getOneIngredient);
+router.get('/',auth, ingredientCtrl.getOneIngredient);
 
-router.get('/:id',ingredientCtrl.getAllIngredients);
+router.get('/:id',auth, ingredientCtrl.getAllIngredients);
 
-router.put('/:id',ingredientCtrl.modifyIngredient);
+router.put('/:id', auth, ingredientCtrl.modifyIngredient);
 
-router.delete('/:id',ingredientCtrl.deleteIngredient);
+router.delete('/:id',auth, ingredientCtrl.deleteIngredient);
 
 module.exports = router;
